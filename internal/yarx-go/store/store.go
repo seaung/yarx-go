@@ -15,6 +15,7 @@ var (
 type IStore interface {
 	DB() *gorm.DB
 	Users() UserStore
+	TaskCrons() TaskCronStore
 }
 
 // IStore的一个实体
@@ -41,4 +42,9 @@ func (ds *datastore) DB() *gorm.DB {
 // 实现Users方法返回UserStore接口的实例
 func (ds *datastore) Users() UserStore {
 	return newUsers(ds.db)
+}
+
+// 实现TaskCronStore方法返回TaskCronStore实例
+func (ds *datastore) TaskCrons() TaskCronStore {
+	return newTaskCron(ds.db)
 }
