@@ -16,6 +16,8 @@ type IStore interface {
 	DB() *gorm.DB
 	Users() UserStore
 	TaskCrons() TaskCronStore
+	TaskRuns() TaskRunStore
+	TaskMains() TaskMainStore
 }
 
 // IStore的一个实体
@@ -47,4 +49,12 @@ func (ds *datastore) Users() UserStore {
 // 实现TaskCronStore方法返回TaskCronStore实例
 func (ds *datastore) TaskCrons() TaskCronStore {
 	return newTaskCron(ds.db)
+}
+
+func (ds *datastore) TaskRuns() TaskRunStore {
+	return newTaskRuns(ds.db)
+}
+
+func (ds *datastore) TaskMains() TaskMainStore {
+	return newTaskMain(ds.db)
 }
