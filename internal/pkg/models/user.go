@@ -18,7 +18,7 @@ type UserModel struct {
 }
 
 func (u *UserModel) TableName() string {
-	return "user"
+	return "users"
 }
 
 func (u *UserModel) BeforeCreate(tx *gorm.DB) (err error) {

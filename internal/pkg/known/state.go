@@ -1,4 +1,4 @@
-package constants
+package known
 
 import "github.com/RichardKnop/machinery/v2/tasks"
 
