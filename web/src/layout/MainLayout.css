@@ -1,0 +1,16 @@
+/* 主布局样式 */
+.main-layout {
+  min-height: 100vh;
+}
+
+.site-layout {
+  background: #f0f2f5;
+}
+
+.site-content {
+  margin: 24px 16px;
+  padding: 24px;
+  background: #fff;
+  min-height: 280px;
+  overflow: auto;
+}

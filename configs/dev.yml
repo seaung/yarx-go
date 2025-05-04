@@ -1,0 +1,18 @@
+app:
+  mode: debug
+  port: :9527
+db:
+  host: 127.0.0.1
+  name: postgres
+  pass: qazwsx123456
+  db: yarx_db
+  level: 1
+  max_open: 10
+  max_lite: 5
+  max_idle: 10
+log:
+  output: [/tmp/yarx/yarx.log, stdout]
+  disable-caller: true
+  disable-stacktrace: true
+  level: debug
+  format: console

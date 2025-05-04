@@ -1,0 +1,10 @@
+app:
+  redis:
+    broker: 127.0.0.1:6379
+    backend: 127.0.0.1:6379
+    default_queue: "machinery_queue"
+    worker_num: 10,
+    index:
+      - 0
+      - 1
+

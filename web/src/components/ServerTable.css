@@ -1,0 +1,42 @@
+/* 服务器表格样式 */
+.server-table-container {
+  width: 100%;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.table-filters {
+  display: flex;
+  gap: 8px;
+}
+
+.table-pagination {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+/* 空状态样式 */
+.ant-empty {
+  margin: 32px 0;
+}
+
+/* 表格内容区域样式 */
+.ant-table-wrapper {
+  background: #fff;
+  border-radius: 2px;
+}
+
+/* 表头样式 */
+.ant-table-thead > tr > th {
+  background: #fafafa;
+  font-weight: 500;
+}
+
+/* 表格行样式 */
+.ant-table-tbody > tr:hover > td {
+  background: #e6f7ff;
+}

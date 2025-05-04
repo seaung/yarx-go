@@ -4,53 +4,59 @@ import (
 	"fmt"
 	"time"
 
-	"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 )
 
-type MySQLOptions struct {
-	Host                  string
-	Username              string
-	Password              string
-	Database              string
-	MaxIdleConnections    int
-	MaxOpenConnections    int
-	MaxConnectionLifeTime time.Duration
-	LogLevel              int
+type SQLOptions struct {
+	Host    string
+	Name    string
+	Pass    string
+	Port    int
+	DB      string
+	Level   int
+	MaxOpen int
+	MaxIdle int
+	MaxLife time.Duration
 }
 
-func (m *MySQLOptions) GetSDN() string {
+func (s *SQLOptions) getDsn() string {
 	return fmt.Sprintf(`%s:%s@tcp(%s)/%s?charset=utf8&parseTime=%t&loc=%s`,
-		m.Username,
-		m.Password,
-		m.Host,
-		m.Database,
+		s.Name,
+		s.Pass,
+		s.Host,
+		s.DB,
 		true,
 		"Local")
 }
 
-func NewMySQL(opts *MySQLOptions) (*gorm.DB, error) {
-	logLevel := logger.Silent
-	if opts.LogLevel != 0 {
-		logLevel = logger.LogLevel(opts.LogLevel)
+func NewConnection(opts *SQLOptions) (*gorm.DB, error) {
+	level := logger.Silent
+	if opts.Level != 0 {
+		level = logger.LogLevel(opts.Level)
 	}
 
-	db, err := gorm.Open(mysql.Open(opts.GetSDN()), &gorm.Config{
-		Logger: logger.Default.LogMode(logLevel),
+	db, err := gorm.Open(postgres.Open(opts.getDsn()), &gorm.Config{
+		Logger: logger.Default.LogMode(level),
 	})
+
 	if err != nil {
-		return nil, err
+		panic(err)
 	}
 
 	sqlDB, err := db.DB()
 	if err != nil {
-		return nil, err
+		panic(err)
 	}
 
-	sqlDB.SetMaxOpenConns(opts.MaxOpenConnections)
-	sqlDB.SetConnMaxLifetime(opts.MaxConnectionLifeTime)
-	sqlDB.SetMaxIdleConns(opts.MaxIdleConnections)
+	// SetMaxOpenConns 设置到数据库的最大打开连接数
+	sqlDB.SetMaxOpenConns(opts.MaxOpen)
 
+	// SetConnMaxLifetime 设置连接可重用的最长时间
+	sqlDB.SetConnMaxLifetime(opts.MaxLife)
+
+	// SetMaxIdleConns 设置空闲连接池的最大连接数
+	sqlDB.SetMaxIdleConns(opts.MaxIdle)
 	return db, nil
 }
