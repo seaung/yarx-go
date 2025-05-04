@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/seaung/yarx-go/internal/pkg/models"
 	"github.com/seaung/yarx-go/internal/yarx/store"
 	"github.com/seaung/yarx-go/pkg/db"
 	"github.com/seaung/yarx-go/pkg/logger"
@@ -77,6 +78,11 @@ func initStore() error {
 
 	instance, err := db.NewConnection(dbOptions)
 	if err != nil {
+		return err
+	}
+
+	// 自动迁移数据库模型
+	if err := models.AutoMigrate(instance); err != nil {
 		return err
 	}
 

@@ -3,6 +3,7 @@ package models
 import (
 	"time"
 
+	"github.com/seaung/yarx-go/pkg/auth"
 	"gorm.io/gorm"
 )
 
