@@ -11,3 +11,9 @@ type LoginResponse struct {
 	Email       string `json:"email"`
 	AccessToken string `json:"access_token"`
 }
+
+type CreateUserRequestForm struct {
+	Nickname string `json:"nickname"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}

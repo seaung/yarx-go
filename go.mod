@@ -7,6 +7,8 @@ require (
 	github.com/gin-gonic/gin v1.10.0
 	github.com/golang-jwt/jwt/v4 v4.5.2
 	github.com/jasonsoft/go-short-id v0.0.0-20180410073244-6ed30cc4305d
+	github.com/jinzhu/copier v0.4.0
+	github.com/projectdiscovery/gologger v1.1.54
 	github.com/projectdiscovery/katana v1.1.3
 	github.com/spf13/cobra v1.9.1
 	github.com/spf13/viper v1.20.1
@@ -113,7 +115,6 @@ require (
 	github.com/projectdiscovery/dsl v0.4.1 // indirect
 	github.com/projectdiscovery/fastdialer v0.4.0 // indirect
 	github.com/projectdiscovery/goflags v0.1.74 // indirect
-	github.com/projectdiscovery/gologger v1.1.54 // indirect
 	github.com/projectdiscovery/gostruct v0.0.2 // indirect
 	github.com/projectdiscovery/hmap v0.0.87 // indirect
 	github.com/projectdiscovery/mapcidr v1.1.34 // indirect
