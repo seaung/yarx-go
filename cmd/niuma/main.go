@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	if err := niuma.NewNiuMaCommand(); err != nil {
+	if err := niuma.NewNiuMaCommand().Execute(); err != nil {
 		os.Exit(1)
 	}
 }

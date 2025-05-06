@@ -1,6 +1,7 @@
 package niuma
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"os"
@@ -46,7 +47,7 @@ func initConfig() {
 }
 
 // 初始化machinery后台
-func initMarchineyDemon() error {
+func initMarchineyDemon(ctx context.Context) (*server.Server, error) {
 	opts := &machinery.MachineryOptions{
 		Broker:       viper.GetString("app.redis.broker"),
 		Backend:      viper.GetString("app.redis.backend"),
@@ -61,9 +62,19 @@ func initMarchineyDemon() error {
 
 	instance := server.NewServer(cfg, broker, backend, lock)
 
-	worker := instance.NewWorker(viper.GetString("app.redis.default_queue"), viper.GetInt("app.redis.worker_num"))
+	// 注册任务
+	_ = registerTasks(instance)
 
-	return worker.Launch()
+	wk := instance.NewWorker(viper.GetString("app.redis.default_queue"), viper.GetInt("app.redis.worker_num"))
+
+	go func() {
+		go func() {
+			<-ctx.Done()
+		}()
+		wk.Launch()
+	}()
+
+	return instance, nil
 }
 
 // 注册任务
