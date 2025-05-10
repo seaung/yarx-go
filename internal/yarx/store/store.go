@@ -15,6 +15,7 @@ var (
 type IStore interface {
 	DB() *gorm.DB
 	Users() UserStore
+	Tasks() TasksStore
 }
 
 type datastore struct {
@@ -37,4 +38,8 @@ func (s *datastore) DB() *gorm.DB {
 
 func (s *datastore) Users() UserStore {
 	return newUsers(s.ds)
+}
+
+func (s *datastore) Tasks() TasksStore {
+	return newTasks(s.ds)
 }
