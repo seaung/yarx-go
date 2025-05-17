@@ -7,5 +7,6 @@ func AutoMigrate(db *gorm.DB) error {
 	// 在这里添加所有需要自动迁移的模型
 	return db.AutoMigrate(
 		&CrawlerURL{},
+		&Vulnerability{},
 	)
 }

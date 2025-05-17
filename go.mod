@@ -5,6 +5,7 @@ go 1.24.1
 require (
 	github.com/RichardKnop/machinery/v2 v2.0.13
 	github.com/gin-gonic/gin v1.10.0
+	github.com/go-redis/redis/v8 v8.11.4
 	github.com/golang-jwt/jwt/v4 v4.5.2
 	github.com/jasonsoft/go-short-id v0.0.0-20180410073244-6ed30cc4305d
 	github.com/jinzhu/copier v0.4.0
